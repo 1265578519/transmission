@@ -2,7 +2,7 @@
 echo "========================================================================="
 echo "Thanks for using Transmission 2.84 for CentOS Auto-Install Script"
 echo "========================================================================="
-yum -y install wget xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which
+yum -y install wget xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which libevent
 service transmissiond stop
 mv -f /home/transmission/Downloads /home
 rm -rf /home/transmission
