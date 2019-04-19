@@ -19,7 +19,7 @@
     "idle-seeding-limit": 30, 
     "idle-seeding-limit-enabled": false, 
     "incomplete-dir": "/home/transmission/tmp", 
-    "incomplete-dir-enabled": true, 
+    "incomplete-dir-enabled": false, 
     "lpd-enabled": true, 
     "message-level": 2, 
     "peer-congestion-algorithm": "", 
