@@ -5,10 +5,15 @@ echo "========================================================================="
 yum -y install wget xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which libevent
 service transmissiond stop
 mv -f /home/transmission/Downloads /home
+mv -f /home/transmission/.config/transmission/resume /home
+mv -f /home/transmission/.config/transmission/torrents /home
 rm -rf /home/transmission
 rm -rf /usr/share/transmission
 mkdir /home/transmission
+mkdir /home/transmission/.config/transmission
 mv -f /home/Downloads /home/transmission
+mv -f /home/resume /home/transmission/.config/transmission
+mv -f /home/torrents /home/transmission/.config/transmission
 cd /root
 wget -c http://github.itzmx.com/1265578519/transmission/master/2.94/intltool-0.40.6.tar.gz -O intltool-0.40.6.tar.gz
 tar zxf intltool-0.40.6.tar.gz
