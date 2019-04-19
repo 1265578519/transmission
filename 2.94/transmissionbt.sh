@@ -3,14 +3,14 @@ echo "========================================================================="
 echo "Thanks for using Transmission 2.94 for CentOS Auto-Install Script"
 echo "========================================================================="
 yum -y install wget xz gcc gcc-c++ m4 make automake libtool gettext openssl-devel pkgconfig perl-libwww-perl perl-XML-Parser curl curl-devel libidn-devel zlib-devel which libevent
-service transmissiond stop
+service transmissiond stop 2&> /dev/null
 mv -f /home/transmission/Downloads /home
 mv -f /home/transmission/.config/transmission/resume /home
 mv -f /home/transmission/.config/transmission/torrents /home
 rm -rf /home/transmission
 rm -rf /usr/share/transmission
-mkdir /home/transmission
-mkdir /home/transmission/.config/transmission
+mkdir -p /home/transmission
+mkdir -p /home/transmission/.config/transmission
 mv -f /home/Downloads /home/transmission
 mv -f /home/resume /home/transmission/.config/transmission
 mv -f /home/torrents /home/transmission/.config/transmission
@@ -49,35 +49,19 @@ chkconfig --add transmissiond
 chkconfig --level 2345 transmissiond on
 mkdir -p /home/transmission/Downloads/
 chmod g+w /home/transmission/Downloads/
-wget -c http://github.itzmx.com/1265578519/transmission/master/2.94/settings.json
+wget -c http://github.itzmx.com/1265578519/transmission/master/2.94/settings.json -O settings.json
 mkdir -p /home/transmission/.config/transmission/
 mv -f settings.json /home/transmission/.config/transmission/settings.json
 chown -R transmission.transmission /home/transmission
-wget -c http://github.itzmx.com/1265578519/transmission/master/2.94/index.html
+wget -c http://github.itzmx.com/1265578519/transmission/master/2.94/index.html -O index.html
 mv -f index.html /usr/share/transmission/web/index.html
 service transmissiond start
-iptables -t nat -F
-iptables -t nat -X
-iptables -t nat -P PREROUTING ACCEPT
-iptables -t nat -P POSTROUTING ACCEPT
-iptables -t nat -P OUTPUT ACCEPT
-iptables -t mangle -F
-iptables -t mangle -X
-iptables -t mangle -P PREROUTING ACCEPT
-iptables -t mangle -P INPUT ACCEPT
-iptables -t mangle -P FORWARD ACCEPT
-iptables -t mangle -P OUTPUT ACCEPT
-iptables -t mangle -P POSTROUTING ACCEPT
-iptables -F
-iptables -X
-iptables -P FORWARD ACCEPT
-iptables -P INPUT ACCEPT
-iptables -P OUTPUT ACCEPT
-iptables -t raw -F
-iptables -t raw -X
-iptables -t raw -P PREROUTING ACCEPT
-iptables -t raw -P OUTPUT ACCEPT
+/sbin/iptables -I INPUT -p tcp --dport 9091 -j ACCEPT
+/sbin/iptables -I INPUT -p tcp --dport 22222 -j ACCEPT
+/sbin/iptables -I INPUT -p udp --dport 22222 -j ACCEPT
 service iptables save
+service ip6tables stop 2&> /dev/null
+chkconfig ip6tables off 2&> /dev/null
 echo "========================================================================="
 echo "Install end"
 echo "========================================================================="
