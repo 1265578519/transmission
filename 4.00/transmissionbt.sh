@@ -35,7 +35,7 @@ ln -s /usr/lib/libevent-2.0.so.5 /usr/local/lib/libevent-2.0.so.5
 ln -s /usr/lib/libevent-2.0.so.5.1.9 /usr/local/lib/libevent-2.0.so.5.1.9
 echo install Transmisson
 cd /root
-wget -c http://github.itzmx.com/1265578519/transmission/master/4.00/transmission-4.00.tar.xz -O transmission-4.00.tar.xz
+wget -c http://github.itzmx.com/1265578519/transmission/master/4.00/transmission-4.0.0.tar.xz -O transmission-4.0.0.tar.xz
 tar Jxvf transmission-4.00.tar.xz
 cd transmission-4.00
 ./configure --prefix=/usr
