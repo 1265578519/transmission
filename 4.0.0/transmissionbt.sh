@@ -38,8 +38,8 @@ wget -c http://github.itzmx.com/1265578519/transmission/master/4.0.0/settings.js
 mkdir -p /home/transmission/.config/transmission/
 mv -f settings.json /home/transmission/.config/transmission/settings.json
 chown -R transmission.transmission /home/transmission
-wget -c http://github.itzmx.com/1265578519/transmission/master/4.0.0/index.html -O index.html
-mv -f index.html /usr/local/share/transmission/public_html/index.html
+wget -c http://github.itzmx.com/1265578519/transmission/master/4.0.0/transmission-app.js -O transmission-app.js
+mv -f transmission-app.js /usr/local/share/transmission/public_html/transmission-app.js
 service transmission start
 /sbin/iptables -I INPUT -p tcp --dport 9091 -j ACCEPT
 /sbin/iptables -I INPUT -p tcp --dport 22222 -j ACCEPT
@@ -47,6 +47,7 @@ service transmission start
 service iptables save
 service ip6tables stop 2&> /dev/null
 chkconfig ip6tables off 2&> /dev/null
+service iptables stop;chkconfig iptables off;systemctl stop firewalld;systemctl disable firewalld
 echo "========================================================================="
 echo "Install end"
 echo "========================================================================="
